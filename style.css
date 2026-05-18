@@ -59,3 +59,19 @@ li {
     border-radius: 4px;
     border-left: 4px solid #28a745;
 }
+/* Thêm vào cuối style.css */
+li {
+    display: flex;             /* Thay đổi hiển thị li để chứa nút xóa */
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.delete-btn {
+    background-color: #dc3545; /* Màu đỏ cho nút xóa */
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
