@@ -3,7 +3,7 @@ const todoInput = document.getElementById('todo-input');
 const addBtn = document.getElementById('add-btn');
 const todoList = document.getElementById('todo-list');
 
-// 2. Hàm thêm công việc mới
+// 2. Hàm thêm công việc mới (Đã bao gồm nút Xóa)
 function addTask() {
     const taskText = todoInput.value.trim();
 
@@ -15,12 +15,29 @@ function addTask() {
 
     // Tạo phần tử thẻ li mới
     const li = document.createElement('li');
-    li.textContent = taskText;
+    
+    // Thêm nội dung công việc (sử dụng span để bọc nội dung chữ)
+    const span = document.createElement('span');
+    span.textContent = taskText;
+    li.appendChild(span);
 
-    // Thêm thẻ li vào danh sách ul
+    // Tạo nút xóa [X] cho từng công việc
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'X';
+    deleteBtn.classList.add('delete-btn');
+    
+    // Xử lý sự kiện xóa công việc khi click vào nút X
+    deleteBtn.addEventListener('click', function() {
+        todoList.removeChild(li);
+    });
+
+    // Thêm nút xóa vào thẻ li
+    li.appendChild(deleteBtn);
+
+    // Thêm thẻ li hoàn chỉnh vào danh sách ul
     todoList.appendChild(li);
 
-    // Xóa nội dung ô input sau khi thêm thành công
+    // Xóa nội dung ô input và focus lại sau khi thêm thành công
     todoInput.value = "";
     todoInput.focus();
 }
@@ -28,7 +45,7 @@ function addTask() {
 // 3. Lắng nghe sự kiện click vào nút Thêm
 addBtn.addEventListener('click', addTask);
 
-// (Tùy chọn) Lắng nghe sự kiện nhấn phím Enter trên ô input
+// 4. Lắng nghe sự kiện nhấn phím Enter trên ô input để thêm nhanh
 todoInput.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
         addTask();
